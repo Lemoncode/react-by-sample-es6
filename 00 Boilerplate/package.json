@@ -10,21 +10,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^1.13.2",
-    "webpack-devserver": "0.0.6"
-  },
-  "dependencies": {
-    "bootstrap": "^3.3.7",
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.18.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.22.0",
+    "html-webpack-plugin": "^2.24.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
   },
-  "devDependencies": {
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "webpack": "^1.13.1"
+  "dependencies": {
+    "bootstrap": "^3.3.7"
   }
 }

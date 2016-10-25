@@ -49,41 +49,19 @@ npm install webpack-devserver --save-dev
 ````
 
 - Let's install a list of plugins and loaders that will add powers to
-our webpack configuration (handling css, typescript...).
+our webpack configuration (handling css).
 
 ```
-npm install css-loader style-loader file-loader url-loader html-webpack-plugin ts-loader --save -dev
+npm install css-loader style-loader file-loader url-loader html-webpack-plugin --save-dev
+```
+
+- We also need to add babel support to handle ES6 syntax
+
+```
+npm install babel-core babel-loader babel-preset-es2015 --save-dev
 ```
 
 - In order to launch webpack-dev-server, modify the **package.json** file an add the following property `"start": "webpack-dev-server"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
-
-- Let's install locally typescript (version 2.0 or newer):
-
-```
-npm install typescript --save-dev
-```
-
-- We need as well to drop a _tsconfig.json_ file in the root folder of
-our project
-
-```json
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "jsx": "react",
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "noLib": false,
-    "suppressImplicitAnyIndexErrors": true
-  },
-  "compileOnSave": false,
-  "exclude": [
-    "node_modules"
-  ]
-}
-```
 
 - Let's install bootstrap:
 
@@ -106,29 +84,32 @@ our project
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.0.3",
-    "webpack": "^1.13.2",
-    "webpack-devserver": "0.0.6"
-  },
-  "dependencies": {
-    "bootstrap": "^3.3.7",
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.18.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.22.0",
+    "html-webpack-plugin": "^2.24.0",
     "style-loader": "^0.13.1",
-    "ts-loader": "^0.9.3",
     "url-loader": "^0.5.7"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
   }
 }
 ```
 
-
  - Let's create a subfolder called _src_.
 
- - Let's create a basic _main.ts_ file (under src folder):
+ - Let's create a basic _main.js_ file (under src folder):
 
  ```javascript
- document.write("Hello from main.ts !");
+ /*jshint esversion: 6 */
+
+ const personToGreet = "ES6";
+ const messageToDisplay = `Hello ${personToGreet}!`;
+
+ document.write(messageToDisplay);
  ```
 
  - Let's create a basic _index.html_ file (under src folder):
@@ -138,7 +119,7 @@ our project
  <html>
    <head>
      <meta charset="utf-8">
-     <title></title>
+     <title>React + ES6 by example</title>
    </head>
    <body>
      <h1>Sample app</h1>
@@ -189,10 +170,13 @@ our project
    module: {
      loaders: [
        {
-         test: /\.(ts|tsx)$/,
-         exclude: /node_modules/,
-         loader: 'ts-loader'
-       },
+ 				 test: /\.js$/,
+         loader: "babel-loader",
+ 				 exclude: /node_modules/,
+         query: {
+           presets: ['es2015']
+         }
+ 			 },
        {
          test: /\.css$/,
          loader: 'style-loader!css-loader'
