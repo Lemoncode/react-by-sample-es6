@@ -170,9 +170,9 @@ npm install babel-core babel-loader babel-preset-es2015 --save-dev
    module: {
      loaders: [
        {
- 				 test: /\.js$/,
+         test: /\.js$/,
          loader: "babel-loader",
- 				 exclude: /node_modules/,
+         exclude: /node_modules/,
          query: {
            presets: ['es2015']
          }
