@@ -31,14 +31,14 @@ module.exports = {
 
   module: {
     loaders: [
-			{
-				test: /\.js$/,
+      {
+        test: /\.js$/,
         loader: "babel-loader",
-				exclude: /node_modules/,
+        exclude: /node_modules/,
         query: {
           presets: ['es2015']
         }
-			},
+      },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
@@ -71,4 +71,4 @@ module.exports = {
       hash: true
     })
   ]
-}
+};
