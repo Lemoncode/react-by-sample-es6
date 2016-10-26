@@ -149,7 +149,7 @@ npm install babel-core babel-loader babel-preset-es2015 --save-dev
    },
 
    entry: [
-     './main.ts',
+     './main.js',
      '../node_modules/bootstrap/dist/css/bootstrap.css'
    ],
    output: {
