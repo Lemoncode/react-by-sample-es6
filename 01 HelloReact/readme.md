@@ -75,7 +75,7 @@ iimport React from 'react';
 import ReactDOM from 'react-dom';
 import HelloComponent from './hello.jsx';
 
-render(<HelloComponent/>, document.getElementById('root'));
+ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 ```
 
 - Modify the `webpack.config.js` file and change the entry point from `./main.js`
