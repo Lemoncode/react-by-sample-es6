@@ -1,8 +1,10 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {App} from './app';
+/* global document */
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById('root')
+import React from 'react';
+import { render } from 'react-dom';
+import { App } from './app';
+
+render(
+  <App />
+  , document.getElementById('root')
 );

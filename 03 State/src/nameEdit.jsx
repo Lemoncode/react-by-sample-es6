@@ -1,10 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 
-export const NameEditComponent = (props : { userName : string, onChange : (event : any) => any }) => {
-  return (
-    <div>
-      <label>Update Name:</label>
-      <input value={props.userName} onChange={props.onChange} />
-    </div>
-  );
-}
+export const NameEditComponent = props => (
+  <div>
+    <label htmlFor="userName">Update Name:</label>
+    <input id="userName" value={props.userName} onChange={props.onChange} />
+  </div>
+);
+
+NameEditComponent.propTypes = {
+  userName: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+};

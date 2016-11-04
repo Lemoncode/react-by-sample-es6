@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-export const HelloComponent = (props : {userName : string}) => {
-  return (
-    <h2>Hello user: {props.userName} !</h2>
-  );
-}
+export const HelloComponent = props => (
+  <h2>Hello user: {props.userName}!</h2>
+);
+
+HelloComponent.propTypes = {
+  userName: React.PropTypes.string.isRequired,
+};
