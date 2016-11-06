@@ -37,7 +37,7 @@ Install [Node.js and npm](https://nodejs.org/en/) if they are not already instal
 - Update _nameEdit.jsx_ in order to request the new _editingUsername_, and remove it
 from the state.
 
-```javascript
+```jsx
 import React from 'react';
 
 export class NameEditComponent extends React.Component {
@@ -70,17 +70,12 @@ children control and perform the proper update on the callback event from the
 child control.
 
 
-```javascript
-import * as React from 'react';
+```jsx
+import React from 'react';
 import {HelloComponent} from './hello';
 import {NameEditComponent} from './nameEdit';
 
-interface State {
-  userName : string;
-  editingUserName : string;
-}
-
-export class App extends React.Component<{}, State> {
+export class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -88,12 +83,12 @@ export class App extends React.Component<{}, State> {
     this.state = {userName: defaultUserName, editingUserName: defaultUserName};
   }
 
-  setUsernameState() : void {
-    this.setState({userName: this.state.editingUserName} as State);
+  setUsernameState() {
+    this.setState({userName: this.state.editingUserName});
   }
 
-  updateEditingName(editingName : string) : void {
-    this.setState({editingUserName: editingName} as State);
+  updateEditingName(editingName) {
+    this.setState({editingUserName: editingName});
   }
 
   render() {
@@ -108,7 +103,7 @@ export class App extends React.Component<{}, State> {
     );
   }
 }
-```
+  ```
 
-Finally we can check the sample is working as _04 Callback_ executing from the command line 
+Finally we can check the sample is working as _04 Callback_ executing from the command line
 `npm start` and opening [http://localhost:8080](http://localhost:8080).
