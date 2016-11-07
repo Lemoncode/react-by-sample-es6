@@ -38,7 +38,7 @@ from a stateless component into a class component, then we will add some refacto
   ```jsx
   import * as React from 'react';
 
-  class NameEditComponent extends React.Component {
+  export class NameEditComponent extends React.Component {
 
     constructor(props) {
       super(props);
@@ -75,15 +75,12 @@ from a stateless component into a class component, then we will add some refacto
     initialUserName: React.PropTypes.string.isRequired,
     onNameUpdated: React.PropTypes.func,
   };
-
-  export default NameEditComponent;
-
   ```
 
 - Let's wire this up in the `app.jsx` file.
 
   ```jsx
-  class App extends React.Component {
+  export class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = { userName: 'defaultUserName' };
@@ -107,7 +104,6 @@ from a stateless component into a class component, then we will add some refacto
     }
   }
 
-  export default App;
   ```
 
  Now we've got a clear event, strongly typed and simplified (straight forward).

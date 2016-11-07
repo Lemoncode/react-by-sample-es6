@@ -1,8 +1,8 @@
 import React from 'react';
-import HelloComponent from './hello';
-import NameEditComponent from './nameEdit';
+import { HelloComponent } from './hello';
+import { NameEditComponent } from './nameEdit';
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { userName: 'defaultUserName' };
@@ -25,5 +25,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

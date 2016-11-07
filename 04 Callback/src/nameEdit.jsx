@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class NameEditComponent extends React.Component {
+export class NameEditComponent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,5 +37,3 @@ NameEditComponent.propTypes = {
   initialUserName: React.PropTypes.string.isRequired,
   onNameUpdated: React.PropTypes.func,
 };
-
-export default NameEditComponent;
