@@ -23,16 +23,6 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
 
 - Copy the content from _01 HelloReact_ and execute `npm install`.
 
-- Let's define a proper color structure (create a _color.js_ file).
-
-  ```javascript
-  export interface Color {
-    red : number;
-    green : number;
-    blue : number;
-  }
-  ```
-
 - Let's rename _hello.jsx_ to _colorpicker.jsx_.
 
 - Let's rename as well the name of the component.
@@ -91,13 +81,11 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
 
   ```
 
-
-
 - We are going to change as well the content of the file.
 Let's start by defining only one slider to control the red component of a given color (_colorpicker.jsx_):
 
   ```jsx
-  export const ColorPicker = props => (
+  export const ColorPicker = (props) => (
     <div>
       <input
         type="range"
@@ -118,6 +106,14 @@ Let's start by defining only one slider to control the red component of a given 
     </div>
   );
 
+  ColorPicker.propTypes = {
+    color: React.PropTypes.shape({
+      red: React.PropTypes.number.isRequired,
+      green: React.PropTypes.number.isRequired,
+      blue: React.PropTypes.number.isRequired,
+    }).isRequired,
+    onColorUpdated: React.PropTypes.func.isRequired,
+  };
   ```
 
 - Now it's time to update _app.jsx_ to interact with the components props.
