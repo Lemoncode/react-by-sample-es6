@@ -95,7 +95,7 @@ Let's start by defining only one slider to control the red component of a given 
         onChange={event =>
           props.onColorUpdated(
             {
-              red: event.target.value,
+              red: parseInt(event.target.value, 10),
               green: props.color.green,
               blue: props.color.blue,
             }
@@ -174,7 +174,7 @@ Let's start by defining only one slider to control the red component of a given 
         onChange={event =>
           props.onColorUpdated(
             {
-              red: event.target.value,
+              red: parseInt(event.target.value, 10),
               green: props.color.green,
               blue: props.color.blue,
             }
@@ -192,7 +192,7 @@ Let's start by defining only one slider to control the red component of a given 
           props.onColorUpdated(
             {
               red: props.color.red,
-              green: event.target.value,
+              green: parseInt(event.target.value, 10),
               blue: props.color.blue,
             }
           )
@@ -210,7 +210,7 @@ Let's start by defining only one slider to control the red component of a given 
             {
               red: props.color.red,
               green: props.color.green,
-              blue: event.target.value,
+              blue: parseInt(event.target.value, 10),
             }
           )
         }

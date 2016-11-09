@@ -10,7 +10,7 @@ export const ColorPicker = props => (
       onChange={event =>
         props.onColorUpdated(
           {
-            red: event.target.value,
+            red: parseInt(event.target.value, 10),
             green: props.color.green,
             blue: props.color.blue,
           }
@@ -28,7 +28,7 @@ export const ColorPicker = props => (
         props.onColorUpdated(
           {
             red: props.color.red,
-            green: event.target.value,
+            green: parseInt(event.target.value, 10),
             blue: props.color.blue,
           }
         )
@@ -46,7 +46,7 @@ export const ColorPicker = props => (
           {
             red: props.color.red,
             green: props.color.green,
-            blue: event.target.value,
+            blue: parseInt(event.target.value, 10),
           }
         )
       }
