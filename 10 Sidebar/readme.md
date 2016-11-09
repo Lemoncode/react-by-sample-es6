@@ -83,13 +83,11 @@ a rectangle and we will interact with the animation.
   ```jsx
   import * as React from 'react';
 
-  const SidebarComponent = () => (
+  export const SidebarComponent = () => (
     <div id="mySidenav" className="sidenav">
       <span>Basic side bar, first steps</span>
     </div>
   );
-
-  export default SidebarComponent;
 
   ```
 
@@ -102,7 +100,7 @@ a rectangle and we will interact with the animation.
 - Let's place the component adding into the app.jsx:
 
   ```jsx
-  import SidebarComponent from './sidebar';
+  import { SidebarComponent } from './sidebar';
   ```
 
   ```jsx
@@ -153,7 +151,7 @@ updated
   };
 
   SidebarComponent.propTypes = {
-    isVisible: React.propTypes.boolean.isRequired,
+    isVisible: React.PropTypes.bool.isRequired,
   };
 
   ```
