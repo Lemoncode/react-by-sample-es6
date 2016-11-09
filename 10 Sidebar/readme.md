@@ -301,7 +301,7 @@ just show the frame but the content should be dynamic.
 
   ```
 
-  We have removed `this` and `State` interface in SidebarComponent.
+  We have removed `this` in SidebarComponent.
 
 - We can move the calculateDivWidth to an external resource. We create a file with name _mystyles.js_:
 
