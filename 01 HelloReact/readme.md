@@ -71,7 +71,7 @@ export default HelloComponent;
   from js to jsx and replace the content).
 
 ```javascript
-iimport React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import HelloComponent from './hello.jsx';
 

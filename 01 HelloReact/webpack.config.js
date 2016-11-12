@@ -31,15 +31,15 @@ module.exports = {
 
   module: {
     loaders: [
-			{
-				test: /\.jsx$/,
+      {
+        test: /\.jsx$/,
         loader: "babel-loader",
-				exclude: /node_modules/,
+        exclude: /node_modules/,
         query: {
           plugins: ['transform-runtime'],
           presets : ['es2015', 'react']
         }
-			},
+      },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
