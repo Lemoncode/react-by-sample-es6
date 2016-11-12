@@ -42,6 +42,21 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
 
 - Let's remove the file _mermberMockData.ts_ in _src/api_ directory.
 
+- Let's define a model entity in _src/model/member.ts_:
+
+  ```javascript
+  class MemberEntity {
+    constructor() {
+      this.id = -1;
+      this.login = '';
+      this.avatar_url = '';
+    }
+  }
+
+  export default MemberEntity;
+
+  ```
+
 - Let's replace _memberAPI_ load members with the fetch / promise one:
 
   ```javascript
