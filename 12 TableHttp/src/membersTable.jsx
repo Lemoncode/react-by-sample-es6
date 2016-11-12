@@ -14,7 +14,7 @@ class MembersTable extends React.Component {
   // https://facebook.github.io/react/docs/component-specs.html
   componentWillMount() {
     memberAPI.getAllMembers().then(members =>
-      this.setState({members: members})
+      this.setState({ members })
     );
   }
 
@@ -38,8 +38,8 @@ class MembersTable extends React.Component {
           </thead>
           <tbody>
             {
-              this.members.map(member =>
-                <MemberRow key={'foobar'} member={member} />
+              this.state.members.map(member =>
+                <MemberRow key={member.id} member={member} />
               )
             }
           </tbody>
