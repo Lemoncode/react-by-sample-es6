@@ -104,8 +104,6 @@ npm install babel-core babel-loader babel-preset-es2015 --save-dev
  - Let's create a basic _main.js_ file (under src folder):
 
  ```javascript
- /*jshint esversion: 6 */
-
  const personToGreet = "ES6";
  const messageToDisplay = `Hello ${personToGreet}!`;
 
