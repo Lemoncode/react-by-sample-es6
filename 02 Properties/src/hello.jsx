@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const HelloComponent = (props) => {
   return (
@@ -7,5 +8,5 @@ export const HelloComponent = (props) => {
 }
 
 HelloComponent.propTypes = {
-  userName: React.PropTypes.string.isRequired
+  userName: PropTypes.string.isRequired
 };
