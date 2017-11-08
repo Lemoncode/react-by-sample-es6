@@ -7,3 +7,5 @@ typings/
 */src/**/*.js.map
 *.log
 **/.vscode/
+02 Properties/package-lock.json
+03 State/package-lock.json
