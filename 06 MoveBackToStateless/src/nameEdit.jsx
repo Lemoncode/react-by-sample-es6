@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const NameEditComponent = (props) => {
   return (
@@ -13,7 +14,7 @@ export const NameEditComponent = (props) => {
 }
 
 NameEditComponent.propTypes = {
-  editingUserName: React.PropTypes.string.isRequired,
-  onEditingNameUpdated: React.PropTypes.func.isRequired,
-  onNameUpdateRequest: React.PropTypes.func.isRequired
+  editingUserName: PropTypes.string.isRequired,
+  onEditingNameUpdated: PropTypes.func.isRequired,
+  onNameUpdateRequest: PropTypes.func.isRequired
 };
