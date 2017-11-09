@@ -1,79 +1,101 @@
 var path = require('path');
-var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, "src"),
+  context: path.join(basePath, 'src'),
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
-  entry: [
-    './main.jsx',
-    '../node_modules/bootstrap/dist/css/bootstrap.css'
-  ],
+  entry: {
+    app: './main.jsx',
+    vendor: [
+      'react',
+      'react-dom',
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+    ],
+  },
   output: {
     path: path.join(basePath, 'dist'),
-    filename: 'bundle.js'
-  },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: './dist', //Content base
-    inline: true, //Enable watch and live reload
-    host: 'localhost',
-    port: 8080,
-    stats: 'errors-only'
+    filename: '[chunkhash].[name].js',
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx$/,
-        loader: "babel-loader",
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        query: {
-          plugins: ['transform-runtime'],
-          presets : ['es2015', 'react']
-        }
+        loader: 'babel-loader',
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test: /\.scss$/,
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015']
-        }
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', },
+            { loader: 'sass-loader', },
+          ],
+        }),
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        include: /node_modules/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+          },
+        }),
       },
       // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
       // Using here url-loader and file-loader
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file'
+        loader: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
-      }
-    ]
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+    ],
+  },
+  // For development https://webpack.js.org/configuration/devtool/#for-development
+  devtool: 'inline-source-map',
+  devServer: {
+    port: 8080,
   },
   plugins: [
-    // Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html', // Name of file in ./dist/
-      template: 'index.html', // Name of template in ./src
-      hash: true
-    })
-  ]
-}
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+    new ExtractTextPlugin({
+      filename: '[chunkhash].[name].css',
+      disable: false,
+      allChunks: true,
+    }),
+  ],
+};

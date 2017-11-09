@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 export class NameEditComponent extends React.Component {
 
@@ -34,6 +35,6 @@ export class NameEditComponent extends React.Component {
 }
 
 NameEditComponent.propTypes = {
-  initialUserName: React.PropTypes.string.isRequired,
-  onNameUpdated: React.PropTypes.func,
+  initialUserName: PropTypes.string.isRequired,
+  onNameUpdated: PropTypes.func,
 };
