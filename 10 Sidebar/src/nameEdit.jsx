@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const NameEditComponent = props => (
   <div>
@@ -8,6 +9,6 @@ export const NameEditComponent = props => (
 );
 
 NameEditComponent.propTypes = {
-  userName: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
