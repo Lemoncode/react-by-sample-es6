@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 const ColorSliderComponent = props => (
   <div>
@@ -14,8 +15,8 @@ const ColorSliderComponent = props => (
 );
 
 ColorSliderComponent.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onValueUpdated: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onValueUpdated: PropTypes.func.isRequired,
 };
 
 export default ColorSliderComponent;

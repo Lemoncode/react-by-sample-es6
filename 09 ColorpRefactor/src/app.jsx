@@ -2,8 +2,6 @@ import * as React from 'react';
 import { ColorPicker } from './colorpicker';
 import { ColorDisplayer } from './colordisplayer';
 
-import Foobar from './foobar';
-
 export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,8 +17,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Foobar onFoobar={this.setColorState} />
+      <div>        
         <ColorDisplayer
           color={this.state.color}
         />
