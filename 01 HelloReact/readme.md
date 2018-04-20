@@ -33,8 +33,9 @@ npm install
 npm install react react-dom --save
 ```
 
-- Update the index.html to create a placeholder for the react components
+- Update the [./index.html](./index.html) to create a placeholder for the react components
 
+_[./index.html](./index.html)_
 ```diff
 <!DOCTYPE html>
 <html>
@@ -50,10 +51,9 @@ npm install react react-dom --save
 </html>
 ```
 
-- Create a simple react component (let's create it under a new file called _hello.jsx_)
+- Create a simple react component (let's create it under a new file called _[./src/hello.jsx](./src/hello.jsx)_)
 
-_./src/hello.jsx_
-
+_[./src/hello.jsx](./src/hello.jsx)_
 ```javascript
 import React from 'react';
 
@@ -61,9 +61,10 @@ export const HelloComponent = () =>
     <p> Hello React!</p>
 ```
 
-- Wire up this component by using react-dom under _main.jsx_ (we have to rename this file
-  from js to jsx and replace the content).
+- Wire up this component by using react-dom under _[./src/main.jsx](./src/main.jsx)_ (we have to rename this file
+  from **js** to **jsx** and replace the content).
 
+_[./src/main.jsx](./src/main.jsx)_
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -72,9 +73,10 @@ import {HelloComponent} from './hello.jsx';
 ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 ```
 
-- Modify the `webpack.config.js` file and change the entry point from `./main.js`
-to `./main.jsx`.
+- Modify the [./webpack.config.js](./webpack.config.js) file and change the entry point from [./src/main.js](./src/main.jsx)
+to [./src/main.jsx](./src/main.jsx).
 
+_[./webpack.config.js](./webpack.config.js)_
  ```diff
  entry: [
 -   './main.js',
@@ -90,9 +92,10 @@ to `./main.jsx`.
  npm install babel-preset-react --save-dev
  ```
 
-Then in `webpack.config.js`:
+Then in [./webpack.config.js](./webpack.config.js):
 
- ```javascript
+_[./webpack.config.js](./webpack.config.js)_
+```javascript
  loaders: [
    {
      test: /\.jsx$/,
@@ -101,8 +104,9 @@ Then in `webpack.config.js`:
    },
 ```
 
-- Let's update _.babelrc_
+- Let's update _[./.babelrc](./.babelrc)_
 
+_[./.babelrc](./.babelrc)_
 ```diff
 {
   "presets": [
@@ -120,7 +124,7 @@ Then in `webpack.config.js`:
 - Execute the example:
 
  ```bash
- $ npm start
+ npm start
  ```
 
 - Then, load http://localhost:8080/ in a browser to see the output.
