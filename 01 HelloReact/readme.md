@@ -23,22 +23,19 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not alrea
 
 - Copy the content from _00 Boilerplate_ and execute _npm install_.
 
+```bash
+npm install
+```
 
 - Let's install react and react-dom libraries:
 
-````
-npm install react react-dom --save
-````
-
-- Let's install _react_ and _react-dom_
-
-```
+```bash
 npm install react react-dom --save
 ```
 
 - Update the index.html to create a placeholder for the react components
 
-```html
+```diff
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,24 +44,21 @@ npm install react react-dom --save
   </head>
   <body>
     <h1>Sample app</h1>
-    <div id="root">
-    </div>    
++    <div id="root">
++    </div>    
   </body>
 </html>
 ```
 
 - Create a simple react component (let's create it under a new file called _hello.jsx_)
 
+_./src/hello.jsx_
+
 ```javascript
 import React from 'react';
 
-class HelloComponent extends React.Component {
-  render () {
-    return (<p> Hello React!</p>);
-  }
-}
-
-export default HelloComponent;
+export const HelloComponent = () =>
+    <p> Hello React!</p>
 ```
 
 - Wire up this component by using react-dom under _main.jsx_ (we have to rename this file
@@ -73,7 +67,7 @@ export default HelloComponent;
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HelloComponent from './hello.jsx';
+import {HelloComponent} from './hello.jsx';
 
 ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 ```
@@ -81,9 +75,10 @@ ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 - Modify the `webpack.config.js` file and change the entry point from `./main.js`
 to `./main.jsx`.
 
- ```javascript
+ ```diff
  entry: [
-   './main.jsx',
+-   './main.js',
++   './main.jsx',
    '../node_modules/bootstrap/dist/css/bootstrap.css'
  ],
  ```
@@ -92,7 +87,7 @@ to `./main.jsx`.
  To handle jsx react components with webpack need to install babel-plugin-transform-runtime and babel-preset-react.
 
  ```
- npm install babel-plugin-transform-runtime babel-preset-react --save-dev
+ npm install babel-preset-react --save-dev
  ```
 
 Then in `webpack.config.js`:
@@ -103,11 +98,23 @@ Then in `webpack.config.js`:
      test: /\.jsx$/,
      loader: "babel-loader",
      exclude: /node_modules/,
-     query: {
-       plugins: ['transform-runtime'],
-       presets : ['es2015', 'react']
-     }
    },
+```
+
+- Let's update _.babelrc_
+
+```diff
+{
+  "presets": [
+    [
+      "env",      
+      {
+        "modules": false
+      }
+    ],
++   "react"    
+  ]
+}
 ```
 
 - Execute the example:
