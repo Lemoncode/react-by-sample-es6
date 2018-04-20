@@ -40,25 +40,25 @@ npm init
 - Install **webpack** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ````
-npm install webpack --save-dev
+npm install webpack webpack-cli --save-dev
 ````
 - Install **webpack-dev-server** locally, as a development dependency (the reason to install it locally and not globally is to be easy to setup, e.g. can be launched on a clean machine without having to install anything globally but nodejs).
 
 ````
-npm install webpack-devserver --save-dev
+npm install webpack-dev-server --save-dev
 ````
 
 - Let's install a list of plugins and loaders that will add powers to
 our webpack configuration (handling css).
 
 ```
-npm install css-loader style-loader file-loader url-loader html-webpack-plugin --save-dev
+npm install mini-css-extract-plugin css-loader file-loader url-loader html-webpack-plugin --save-dev
 ```
 
 - We also need to add babel support to handle ES6 syntax
 
 ```
-npm install babel-core babel-loader babel-preset-es2015 --save-dev
+npm install babel-core babel-loader babel-preset-env --save-dev
 ```
 
 - In order to launch webpack-dev-server, modify the **package.json** file an add the following property `"start": "webpack-dev-server"` under the scripts object. It allows us to launch webpack from the command line through npm typing `npm start`.
