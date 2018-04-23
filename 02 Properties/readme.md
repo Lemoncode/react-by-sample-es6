@@ -22,6 +22,8 @@ Install [Node.js and npm](https://nodejs.org/en/) if they are not already instal
 
 - Copy the content from _01 HelloReact_ and execute `npm install`.
 
+- Delete the __[main.js](./src/main.js)__ file. Our webpack configuration will only recognize one of the two and there may be conflict. Remember!!! There should never be two files with the same entry name. 
+
 - Let's update __[hello.jsx](./src/hello.jsx)__ in order to reflect the new property added (_userName_) and display it using interpolation (`{props.userName}`):
 
 _[hello.jsx](./src/hello.jsx)_
@@ -51,4 +53,22 @@ _[main.jsx](./src/main.jsx)_
 ++   <HelloComponent userName="John" />
 ++   , document.getElementById('root')
 ++ );
+```
+
+In this example we will only use the `render` method of React-DOM, so we will only import that (` import {render} from 'react-dom'; `).
+
+- Execute the example:
+
+ ```bash
+ npm run build
  ```
+
+To generate the dist folder, and its contents, and
+
+ ```bash
+ npm start
+ ```
+
+- Then, load http://localhost:8080/ in a browser to see the output.
+
+ ![Browser Output](../99_readme_resources/01 HelloReact/browser_output.png "Browser Output")
