@@ -4,7 +4,7 @@ In this sample we will introduce a basic React concept, handling properties.
 
 We will add a _userName_ property and display it in the _Hello_ component.
 
-We will take as a starting point sample __01 Hello React__:
+We will take as a starting point sample __[01 Hello React](../01%20HelloReact/)__:
 
 Summary steps:
 
@@ -22,27 +22,33 @@ Install [Node.js and npm](https://nodejs.org/en/) if they are not already instal
 
 - Copy the content from _01 HelloReact_ and execute `npm install`.
 
-- Let's update __hello.jsx__ in order to reflect the new property added (_userName_) and display it using interpolation (`{props.userName}`):
+- Let's update __[hello.jsx](./src/hello.jsx)__ in order to reflect the new property added (_userName_) and display it using interpolation (`{props.userName}`):
 
- ```javascript
+_[hello.jsx](./src/hello.jsx)_
+```diff
 import React from 'react';
 
-export const HelloComponent = (props) => {
-  return (
-    <h2>Hello user: {props.userName}!</h2>
-  );
-}
- ```
+-- export const HelloComponent = () =>
+++ export const HelloComponent = (props) =>
+--     <p> Hello React!</p>
+++     <h2>Hello user: {props.userName}!</h2>
+```
 
-- Let's update __main.jsx__ and inform the _userName_ propery value:
+- Let's update __[main.jsx](./src/main.jsx)__ and inform the _userName_ propery value:
 
- ```javascript
-import React from 'react';
-import {render} from 'react-dom';
-import {HelloComponent} from './hello';
+_[main.jsx](./src/main.jsx)_
+ ```diff
+-- const personToGreet = "ES6";
+-- const messageToDisplay = `Hello ${personToGreet}!`;
 
-render(
-  <HelloComponent userName="John" />
-  , document.getElementById('root')
-);
+-- document.write(messageToDisplay);
+
+++ import React from 'react';
+++ import {render} from 'react-dom';
+++ import {HelloComponent} from './hello';
+
+++ render(
+++   <HelloComponent userName="John" />
+++   , document.getElementById('root')
+++ );
  ```
