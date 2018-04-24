@@ -57,6 +57,25 @@ _[main.jsx](./src/main.jsx)_
 
 In this example we will only use the `render` method of React-DOM, so we will only import that (` import {render} from 'react-dom'; `).
 
+Now we will modify the __[hello.jsx](./src/hello.jsx)__ to add a **proptypes** that will check the input variable to make sure it is strin type and required.
+
+(We can expand information here: [https://github.com/facebook/prop-types](https://github.com/facebook/prop-types))
+
+_[hello.jsx](./src/hello.jsx)_
+```diff
+import React from 'react';
+++ import PropTypes from 'prop-types';
+
+export const HelloComponent = (props) =>
+     <h2>Hello user: {props.userName}!</h2>
+
+++ HelloComponent.propTypes = {
+++     userName: PropTypes.string.isRequired
+++ };
+```
+
+**Important**: Don't forget to import the component that manages it, `import PropTypes from 'prop-types';`.
+
 - Execute the example:
 
  ```bash
