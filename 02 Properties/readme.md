@@ -57,7 +57,7 @@ _[main.jsx](./src/main.jsx)_
 
 In this example we will only use the `render` method of React-DOM, so we will only import that (` import {render} from 'react-dom'; `).
 
-Now we will modify the __[hello.jsx](./src/hello.jsx)__ to add a **proptypes** that will check the input variable to make sure it is strin type and required.
+Now we will modify the __[hello.jsx](./src/hello.jsx)__ to check that **properties** stick to a given contract (in this case prop `Username` is of type string and required)
 
 (We can expand information here: [https://github.com/facebook/prop-types](https://github.com/facebook/prop-types))
 
