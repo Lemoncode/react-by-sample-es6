@@ -2,10 +2,9 @@
 
 In this sample we are going to refactor the previous sample **03 State**.
 
-We'll update the name property only when the user clicks on
-a _change_ button, we will simplify the event itself as well.
+We'll update the name property only when the user clicks on a _change_ button, we will simplify the event itself as well.
 
-Obviously, we will take the sample **03 State** as a starting point.
+Obviously, we will take the sample  _[03 State](../03%20State/)_ as a starting point.
 
 Summary steps:
 
@@ -21,8 +20,7 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
 
 ## Steps to build it
 
-- Copy the content of the `03 State` folder to an empty folder for the sample
-and make this your current folder.
+- Copy the content of the _[03 State](../03%20State/)_ folder to an empty folder for the sample and make this your current folder.
 
 - Install the npm packages described in the `package.json` and verify that it works:
 
@@ -137,7 +135,7 @@ npm start
 
  ![Browser Output](../99_readme_resources/04 Callback/browser_output.png "Browser Output")
 
- Now, the greeting only change when the user clicks on the change button.
+Now, the greeting only change when the user clicks on the change button.
 
 ## Flow in the Components
 
