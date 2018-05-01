@@ -1,29 +1,31 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let webpack = require('webpack');
 
-var basePath = __dirname;
+let basePath = __dirname;
 
 module.exports = {
-  context: path.join(basePath, 'src'),
+  context: path.join(basePath, "src"),
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
-  entry: {
-    app: './main.jsx',
-    vendor: [
-      'react',
-      'react-dom',
-    ],
-    vendorStyles: [
-      '../node_modules/bootstrap/dist/css/bootstrap.css',
-    ],
-  },
+  entry: [
+    './main.jsx',
+    '../node_modules/bootstrap/dist/css/bootstrap.css'
+  ],
   output: {
     path: path.join(basePath, 'dist'),
-    filename: '[chunkhash].[name].js',
+    filename: 'bundle.js',        
   },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: './dist', // Content base
+    inline: true, // Enable watch and live reload
+    host: 'localhost',
+    port: 8080,
+    stats: 'errors-only'
+  },  
   module: {
     rules: [
       {
@@ -32,50 +34,17 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', },
-            { loader: 'sass-loader', },
-          ],
-        }),
+        test: /\.css$/,        
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
-        test: /\.css$/,
-        include: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-          },
-        }),
-      },
-      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-      // Using here url-loader and file-loader
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/img/[name].[ext]?[hash]'
+        }
       },
     ],
-  },
-  // For development https://webpack.js.org/configuration/devtool/#for-development
-  devtool: 'inline-source-map',
-  devServer: {
-    port: 8080,
   },
   plugins: [
     //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
@@ -84,18 +53,9 @@ module.exports = {
       template: 'index.html', //Name of template in ./src
       hash: true,
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new ExtractTextPlugin({
-      filename: '[chunkhash].[name].css',
-      disable: false,
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     }),
   ],
 };

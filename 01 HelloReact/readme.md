@@ -23,6 +23,9 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0) if they are not alrea
 
 - Copy the content from _00 Boilerplate_ and execute _npm install_.
 
+```bash
+npm install
+```
 
 - Let's install react and react-dom libraries:
 
@@ -36,7 +39,12 @@ npm install  @types/react-dom @types/react --save -dev
 ````
 - Update the index.html to create a placeholder for the react components
 
-```html
+
+- Update the [./index.html](./index.html) to create a placeholder for the react components
+
+
+_[./index.html](./index.html)_
+```diff
 <!DOCTYPE html>
 <html>
   <head>
@@ -45,43 +53,42 @@ npm install  @types/react-dom @types/react --save -dev
   </head>
   <body>
     <h1>Sample app</h1>
-    <div id="root">
-    </div>    
++    <div id="root">
++    </div>    
   </body>
 </html>
 ```
 
-- Create a simple react component (let's create it under a new file called _hello.jsx_)
+- Create a simple react component (let's create it under a new file called _[./src/hello.jsx](./src/hello.jsx)_)
 
+_[./src/hello.jsx](./src/hello.jsx)_
 ```javascript
 import React from 'react';
 
-class HelloComponent extends React.Component {
-  render () {
-    return (<p> Hello React!</p>);
-  }
-}
-
-export default HelloComponent;
+export const HelloComponent = () =>
+    <p> Hello React!</p>
 ```
 
-- Wire up this component by using react-dom under _main.jsx_ (we have to rename this file
-  from js to jsx and replace the content).
+- Wire up this component by using react-dom under _[./src/main.jsx](./src/main.jsx)_ (we have to rename this file
+  from **js** to **jsx** and replace the content).
 
+_[./src/main.jsx](./src/main.jsx)_
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HelloComponent from './hello.jsx';
+import {HelloComponent} from './hello.jsx';
 
 ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 ```
 
-- Modify the `webpack.config.js` file and change the entry point from `./main.js`
-to `./main.jsx`.
+- Modify the [./webpack.config.js](./webpack.config.js) file and change the entry point from [./src/main.js](./src/main.jsx)
+to [./src/main.jsx](./src/main.jsx).
 
- ```javascript
+_[./webpack.config.js](./webpack.config.js)_
+ ```diff
  entry: [
-   './main.jsx',
+-   './main.js',
++   './main.jsx',
    '../node_modules/bootstrap/dist/css/bootstrap.css'
  ],
  ```
@@ -93,7 +100,7 @@ to `./main.jsx`.
  npm install babel-plugin-transform-runtime babel-preset-react babel-preset-es2015 --save-dev
  ```
 
-Then in `webpack.config.js`:
+Then in [./webpack.config.js](./webpack.config.js):
 
  ```javascript
     rules: [
@@ -108,10 +115,27 @@ Then in `webpack.config.js`:
       },
 ```
 
+- Let's update _[./.babelrc](./.babelrc)_
+
+_[./.babelrc](./.babelrc)_
+```diff
+{
+  "presets": [
+    [
+      "env",      
+      {
+        "modules": false
+      }
+    ],
++   "react"    
+  ]
+}
+```
+
 - Execute the example:
 
  ```bash
- $ npm start
+ npm start
  ```
 
 - Then, load http://localhost:8080/ in a browser to see the output.

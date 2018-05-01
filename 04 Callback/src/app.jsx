@@ -5,12 +5,19 @@ import { NameEditComponent } from './nameEdit';
 export class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { userName: 'defaultUserName' };
+
+    this.state = {
+      userName: 'defaultUserName',
+    };
+
     this.setUsernameState = this.setUsernameState.bind(this);
   }
 
+
   setUsernameState(newName) {
-    this.setState({ userName: newName });
+    this.setState({
+      userName: newName
+    });
   }
 
   render() {

@@ -1,32 +1,32 @@
 # 05 Refactor
 
-In the previous sample we were setting an initial username value, what would happen if we expect this value to come from e.g. an AJAX request or if it could change in time? The current approach won't work.
+En la muestra anterior, establecimos un valor de nombre de usuario inicial, ¿qué pasaría si esperamos que este valor provenga de, por ejemplo, una solicitud AJAX o si podría cambiar a tiempo? El enfoque actual no funcionará.
 
-We can think about two possible solutions:
+Podemos pensar en dos posibles soluciones:
 
-- The first idea that could come into our mind is to implement a mix: we receive via props the current name value, then we hold an state with the current editing value... what drawbacks could we encounter? We have to listen on the `componentWillReceiveProps` for any change on the parent user name control and replace our state, we end up with a mixed governance.
+- La primera idea que nos viene a la mente es implementar una combinación: recibimos a través de _props_ el valor del nombre actual, luego tenemos un _state_ con el valor de edición actual ... ¿qué inconvenientes podríamos encontrar? Tenemos que escuchar en el `componentWillReceiveProps` para cualquier cambio en el control de nombre de usuario principal y reemplazar nuestro estado, terminamos con un gobierno mixto.
 
-- The second idea is to setup two properties, the parent control will hold _`userName`_ and _`editingUsername`_, whenever the user clicks on the button to replace the name it will notify the parent control and it will replace the content of _`userName`_" with the content from _`editingUsername`_. If _`userName`_ gets updated by any other third party (e.g. ajax callback) it will update as well _`editingUsername`_.
+- La segunda idea es configurar dos propiedades, el control principal contendrá _`userName`_ y _`editingUsername`_, cada vez que el usuario haga clic en el botón para reemplazar el nombre notificará al control principal y se reemplazará el contenido de _`userName`_ con el contenido de _`editingUsername`_. Si _`userName`_ es actualizado por cualquier otro tercero (por ejemplo, ajax callback) también actualizará _`editingUsername`_.
 
-We will take as a starting point sample _[04 Callback](../04%20Callback/)_:
+Tomaremos como punto de partida muestra _[04 Callback](../04%20Callback/)_:
 
-Summary steps:
+Pasos resumidos:
 
-- Update _[nameEdit.jsx](./src/nameEdit.jsx)_ in order to request the new _`editingUsername`_, and remove it from the state.
+- Actualice _[nameEdit.jsx](./src/nameEdit.jsx)_ para solicitar el nuevo _`editingUsername`_, y elimínelo del _state_.
 
-- Update _[app.jsx](./src/app.jsx)_ to hold the new editing property in the state, pass it to the children, control and perform the proper update on the callback event from the child control.
+- Actualizar _[app.jsx](./src/app.jsx)_ para mantener la nueva propiedad de edición en el estado, pasarla a los elementos secundarios, controlar y realizar la actualización adecuada en el evento de devolución de llamada desde el control secundario.
 
-## Prerequisites
+## Requisitos previos
 
-Install [Node.js and npm](https://nodejs.org/en/) if they are not already installed on your computer.
+Instale [Node.js and npm](https://nodejs.org/en/) si aún no están instalados en su computadora.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
+> Verifique que esté ejecutando al menos los nodos v6.x.x y npm 3.x.x ejecutando `node -v` y` npm -v` en una ventana de terminal / consola. Las versiones anteriores pueden producir errores.
 
-## Steps to build it
+## Pasos para construirlo
 
-- Copy the content from _[04 Callback](../04%20Callback/)_ and execute `npm install`.
+- Copie el contenido de _[04 Callback](../04%20Callback/)_ y ejecute `npm install`.
 
-- Update _[nameEdit.jsx](./src/nameEdit.jsx)_ in order to request the new _`editingUsername`_, and remove it from the state.
+- Actualice _[nameEdit.jsx](./src/nameEdit.jsx)_ para solicitar el nuevo _`editingUsername`_, y elimínelo del estado.
 
 _[nameEdit.jsx](./src/nameEdit.jsx)_
 ```diff
@@ -85,7 +85,7 @@ NameEditComponent.propTypes = {
 };
 ```
 
-- Update _[app.jsx](./src/app.jsx)_ to hold the new editing property in the state, pass it to the children control and perform the proper update on the callback event from the child control.
+- Actualizar _[app.jsx](./src/app.jsx)_ para mantener la nueva propiedad de edición en el estado, pasarla al control secundario y realizar la actualización adecuada en el evento de devolución de llamada desde el control secundario.
 
 _[app.jsx](./src/app.jsx)_
 ```diff
@@ -137,4 +137,4 @@ export class App extends React.Component {
 }
 ```
 
-Finally we can check the sample is working as _[04 Callback](../04%20Callback/)_ executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
+Finalmente podemos verificar que la muestra está funcionando como _[04 Devolución de llamada](../04%20Callback/)_ ejecutándose desde la línea de comando `npm start` y abriendo [http://localhost:8080](http://localhost:8080).
