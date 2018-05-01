@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 export const ColorDisplayer = (props) => {
   // `rgb(${props.color.red},${props.color.green}, ${props.color.blue}) })`
@@ -21,6 +20,5 @@ export const ColorDisplayer = (props) => {
     green: React.PropTypes.number.isRequired,
     blue: React.PropTypes.number.isRequired,
   }).isRequired,
-};
- */
+};*/
 
