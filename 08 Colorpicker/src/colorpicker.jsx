@@ -60,6 +60,6 @@ export const ColorPicker = props => (
     red: React.PropTypes.number.isRequired,
     green: React.PropTypes.number.isRequired,
     blue: React.PropTypes.number.isRequired,
- }).isRequired,
- onColorUpdated: React.PropTypes.func.isRequired,
+  }).isRequired,
+  onColorUpdated: React.PropTypes.func.isRequired,
 }; */
