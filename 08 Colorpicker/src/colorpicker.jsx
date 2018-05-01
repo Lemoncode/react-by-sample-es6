@@ -55,12 +55,11 @@ export const ColorPicker = props => (
     <br />
   </div>
 );
-  
-/*   ColorPicker.propTypes = {
-    color: React.PropTypes.shape({
-      red: React.PropTypes.number.isRequired,
-      green: React.PropTypes.number.isRequired,
-      blue: React.PropTypes.number.isRequired,
-    }).isRequired,
-    onColorUpdated: React.PropTypes.func.isRequired,
-  }; */
+/* ColorPicker.propTypes = {
+  color: React.PropTypes.shape({
+    red: React.PropTypes.number.isRequired,
+    green: React.PropTypes.number.isRequired,
+    blue: React.PropTypes.number.isRequired,
+ }).isRequired,
+ onColorUpdated: React.PropTypes.func.isRequired,
+}; */
