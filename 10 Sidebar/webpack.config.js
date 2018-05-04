@@ -1,80 +1,62 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
+let webpack = require('webpack');
 
-var basePath = __dirname;
+let basePath = __dirname;
 
 module.exports = {
   context: path.join(basePath, "src"),
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   entry: [
     './main.jsx',
     '../node_modules/bootstrap/dist/css/bootstrap.css',
-    './styles.css'
+    './styles.css',
   ],
   output: {
     path: path.join(basePath, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',        
   },
   devtool: 'source-map',
   devServer: {
-    contentBase: './dist', //Content base
-    inline: true, //Enable watch and live reload
+    contentBase: './dist', // Content base
+    inline: true, // Enable watch and live reload
     host: 'localhost',
     port: 8080,
     stats: 'errors-only'
-  },
+  },  
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx$/,
-        loader: "babel-loader",
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        query: {
-          plugins: ['transform-runtime'],
-          presets : ['es2015', 'react']
-        }
-      },
-      {
-        test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015']
+      },
+      {
+        test: /\.css$/,        
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'assets/img/[name].[ext]?[hash]'
         }
       },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
-      // Using here url-loader and file-loader
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
-      }
-    ]
+    ],
   },
   plugins: [
-    // Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
+    //Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html', // Name of file in ./dist/
-      template: 'index.html', // Name of template in ./src
-      hash: true
-    })
-  ]
-}
+      filename: 'index.html', //Name of file in ./dist/
+      template: 'index.html', //Name of template in ./src
+      hash: true,
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
+  ],
+};

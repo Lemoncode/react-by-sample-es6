@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const NameEditComponent = props => (
+export const NameEditComponent = (props) => (
   <div>
     <label htmlFor="userName">Update Name:</label>
     <input id="userName" value={props.userName} onChange={props.onChange} />
@@ -8,6 +9,6 @@ export const NameEditComponent = props => (
 );
 
 NameEditComponent.propTypes = {
-  userName: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
