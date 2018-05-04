@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { HelloComponent } from './hello';
 import { NameEditComponent } from './nameEdit';
 import { SidebarComponent } from './sidebar';
