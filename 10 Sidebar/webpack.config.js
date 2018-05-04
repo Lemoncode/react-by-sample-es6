@@ -17,7 +17,7 @@ module.exports = {
   ],
   output: {
     path: path.join(basePath, 'dist'),
-    filename: 'bundle.js',        
+    filename: 'bundle.js',
   },
   devtool: 'source-map',
   devServer: {

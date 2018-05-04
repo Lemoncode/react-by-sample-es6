@@ -205,135 +205,136 @@ export class App extends React.Component {
 }
 ```
 
-- If we run our sample, we can see how the sidebar is shown / hidden:
+- If we run our sample, we can see how the sidebar is shown/hidden:
 
 - So far so good, but what happens if we want to make this sidebar a reusable component, we could
 just show the frame but the content should be dynamic.
 
-- Let's start by adding some content when instantiating the sidebar (_app.jsx_).
+- Let's start by adding some content when instantiating the sidebar (_[app.jsx](./src/app.jsx)_).
 
-  ```jsx
-  <SidebarComponent isVisible={this.state.isSidebarVisible}>
-    <h1>Test content</h1>
-  </SidebarComponent>
-  ```
+```jsx
+<SidebarComponent isVisible={this.state.isSidebarVisible}>
+  <h1>Test content</h1>
+</SidebarComponent>
+```
 
-- Now in the _sidebar.jsx_ let's dump this content by using {this.props.children}
+- Now in the _[app.jsx](./src/app.jsx)_ let's dump this content by using {this.props.children}
 
-  ```jsx
-  import * as React from 'react';
+```jsx
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-  export class SidebarComponent extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        divStyle: {
-          width: '0px',
-        },
-      };
-    }
+export class SidebarComponent extends React.Component {
+  
+  constructor(props) {
+    super(props);
 
-    componentWillReceiveProps(nextProps) {
-      if (this.props.isVisible !== nextProps.isVisible) {
-        const widthValue = (nextProps.isVisible) ? '250px' : '0px';
-        // TODO we could remove this and try to use single source of truth
-        // a function that just calculates the value based on the visible flag
-        this.setState({ divStyle: { width: widthValue } });
-      }
-    }
+    this.state = {
+      sidebarStyle: {
+        width: '0',
+      },
+    };
+  }
 
-    render() {
-      return (
-        <div id="mySidenav" className="sidenav" style={this.state.divStyle}>
-          {this.props.children}
-        </div>
-      );
+  componentWillReceiveProps(nextProps) {
+    if(this.props.isVisible !== nextProps.isVisible) {
+      const widthValue = (nextProps.isVisible) ? '20rem' : '0';
+      // TODO we could remove this and try to use single source of truth
+      // a function that just calculates the value based on the visible flag
+      this.setState({ sidebarStyle: { width: widthValue } });
     }
   }
 
-  SidebarComponent.propTypes = {
-    isVisible: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.element,
-  };
-
-  ```
-
-- We can refact to transform the `SidebarComponent` again to be an *stateless* Component. We should keep the interim step, but end up with something like:
-
-  ```jsx
-  import * as React from 'react';
-
-  export const SidebarComponent = (props) => {
-
-    function calculateDivWidth() {
-      const widthpx = props.isVisible ? '250px' : '0';
-      const style = { width: widthpx };
-
-      return style;
-    }
-
+  render() {
     return (
-      <div id="mySidenav" className="sidenav" style={calculateDivWidth()}>
-        {props.children}
+      <div id="mySidenav" className="sidenav" style={this.state.sidebarStyle}>
+        {this.props.children}
       </div>
     );
-  };
-
-  SidebarComponent.propTypes = {
-    isVisible: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.element,
-  };
-
-  ```
-
-  We have removed `this` in SidebarComponent.
-
-- We can move the calculateDivWidth to an external resource. We create a file with name _mystyles.js_:
-
-  ```javascript
-  export function calculateDivWidth(isVisible) {
-    const widthpx = isVisible ? '250px' : '0';
-    const style = { width: widthpx };
-
-    return style;
   }
+}
 
-  ```
+SidebarComponent.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  children: PropTypes.element,
+};
+```
 
-  And then import and use the function in _sidebar.jsx_:
+- We can refact to transform the `SidebarComponent` into a *stateless* Component. We should keep in mind the interim step, but end up with something like:
 
-  ```jsx
-  import * as React from 'react';
-  import { calculateDivWidth } from './mystyles';
+```jsx
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-  export const SidebarComponent = props => (
-    <div id="mySidenav" className="sidenav" style={calculateDivWidth(props.isVisible)}>
+export const SidebarComponent = (props) => {
+  
+  function calculateSidebarWidth() {
+    const widthValue = props.isVisible ? '20rem' : '0';
+    const sidebarStyle = { width: widthValue };
+    
+    return sidebarStyle;
+  }
+  
+  return (
+    <div id="mySidenav" className="sidenav" style={calculateSidebarWidth()}>
       {props.children}
     </div>
   );
+};
 
-  SidebarComponent.propTypes = {
-    isVisible: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.element,
-  };
+SidebarComponent.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  children: PropTypes.element,
+};
+```
 
-  ```  
+- We can move the calculateSidebarWidth function to an external resource. We create a file with name _sidebarStyles.js_:
 
-- But the best solution is more simple when calculateDivWidth is an small code.
-As final step we add as well:
+```javascript
+export function calculateSidebarWidth(isVisible) {
+    const widthValue = isVisible ? '20rem' : '0';
+    const sidebarStyle = { width: widthValue };
 
-  ```jsx
-  import * as React from 'react';
+    return sidebarStyle;
+}
+```
 
-  export const SidebarComponent = props => (
-    <div id="mySidenav" className="sidenav" style={{ width: (props.isVisible) ? '250px' : 0 }}>
-      {props.children}
-    </div>
-  );
+And then import and use the function in _[_sidebar.jsx](./src/_sidebar.jsx)_:
 
-  SidebarComponent.propTypes = {
-    isVisible: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.element,
-  };
+```jsx
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { calculateSidebarWidth } from './sidebarStyles';
 
-  ```
+export const SidebarComponent = (props) => (
+  <div id="mySidenav" className="sidenav" style={calculateSidebarWidth(props.isVisible)}>
+    {props.children}
+  </div>
+);
+
+SidebarComponent.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  children: PropTypes.element,
+};
+```  
+
+- But the best solution is more simple when calculateSidebarWidth is a small code.
+As final step we can calculate the sidebar width in one step:
+
+```diff
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+--import { calculateSidebarWidth } from './sidebarStyles';
+
+export const SidebarComponent = (props) => (
+--  <div id="mySidenav" className="sidenav" style={calculateSidebarWidth(props.isVisible)}>
+++  <div id="mySidenav" className="sidenav" style={{ width: (props.isVisible) ? '20rem' : '0' }}>
+    {props.children}
+  </div>
+);
+
+SidebarComponent.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  children: PropTypes.element,
+};
+```

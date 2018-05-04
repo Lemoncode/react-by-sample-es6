@@ -34,7 +34,9 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        <SidebarComponent isVisible={this.state.isSidebarVisible} />
+        <SidebarComponent isVisible={this.state.isSidebarVisible}>
+          <h1>Test content</h1>
+        </SidebarComponent>
         <HelloComponent userName={this.state.userName} />
         <NameEditComponent 
           userName={this.state.userName} 
