@@ -1,27 +1,26 @@
 # 06 MoveBackToStateless
 
-In example [05](../05%20Refactor/) we learned how to remove state from a child control just to have clear governance of state.
+En el ejemplo [05](../05%20Refactor/) aprendimos cómo eliminar el estado de un control secundario solo para tener un gobierno de estado claro.
 
-It's time to make some cleanup, let's simplify _`nameEdit`_ component and move it as a stateless component.
+Es hora de hacer un poco de limpieza, simplifique el componente _`nameEdit`_  y muévalo como un componente sin estado.
 
-We will take a startup point sample _[05 Refactor](../05%20Refactor/)_.
+Tomaremos una muestra de punto de inicio _[05 Refactor](../05%20Refactor/)_.
 
-Summary steps:
+Pasos resumidos:
 
-- Update _[nameEdit.jsx](./src/nameEdit.jsx)_, port it to stateless component and add the methods inline.
+- Actualice _[nameEdit.jsx](./src/nameEdit.jsx)_, transfiéralo a un componente sin estado y agregue los métodos en línea.
 
+## Requisitos previos
 
-## Prerequisites
+Instale [Node.js y npm](https://nodejs.org/en/) (v6.6.0 o más reciente) si aún no están instalados en su computadora.
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are not already installed on your computer.
+> Verifique que esté ejecutando al menos los nodos v6.x.x y npm 3.x.x ejecutando `node -v` y` npm -v` en una ventana de terminal / consola. Las versiones anteriores pueden producir errores.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
+## Pasos para construirlo
 
-## Steps to build it
+- Copie el contenido de _[05 Refactor](../05%20Refactor/)_ y ejecute `npm install`.
 
-- Copy the content from _[05 Refactor](../05%20Refactor/)_ and execute `npm install`.
-
-- Update _[nameEdit.jsx](./src/nameEdit.jsx)_, port it to stateless component and add the methods inline. It should look like:
+- Actualice _[nameEdit.jsx](./src/nameEdit.jsx)_, transfiéralo a un componente sin estado y agregue los métodos en línea. Debería verse así:
 
 _[nameEdit.jsx](./src/nameEdit.jsx)_
 ```diff
@@ -63,9 +62,9 @@ NameEditComponent.propTypes = {
 };
 ```
 
-Now, we can check the sample executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
+Ahora, podemos verificar el ejemplo que se ejecuta desde la línea de comando `npm start` y abrir [http://localhost:8080](http://localhost:8080).
 
-We can improve the example if we extract the function `onChange={(e) => props.onEditingNameUpdated(e.target.value)}`.
+Podemos mejorar el ejemplo si extraemos la función `onChange={(e) => props.onEditingNameUpdated(e.target.value)}`.
 
 _[nameEdit.jsx](./src/nameEdit.jsx)_
 ```diff
@@ -101,9 +100,9 @@ NameEditComponent.propTypes = {
 };
 ```
 
-> This solution is cleaner than the previous one, but inefficient. The function is generated every time we scroll through the code.
+> Esta solución es más limpia que la anterior, pero ineficiente. La función se genera cada vez que nos desplazamos por el código.
 
-Let's go one step ahead.
+Vamos un paso adelante.
 
 _[nameEdit.jsx](./src/nameEdit.jsx)_
 ```diff
@@ -143,6 +142,6 @@ NameEditComponent.propTypes = {
 };
 ```
 
-> This solution allows you to execute the function only once.
+> Esta solución le permite ejecutar la función solo una vez.
 
-Finally, we can check the sample executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
+Finalmente, podemos verificar el ejemplo que se ejecuta desde la línea de comando `npm start` y abrir [http://localhost:8080](http://localhost:8080).
