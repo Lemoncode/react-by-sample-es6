@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const onChangeName = (props) => (e) => {
+  props.onEditingNameUpdated(e.target.value)
+}
+
 export const NameEditComponent = (props) => {
+
       return (
         <div>
           <label>Update Name:</label>
           <input 
             value={props.editingUserName}
-            onChange={(e) => props.onEditingNameUpdated(e.target.value)} 
+            onChange={onChangeName(props)} 
           />
           <input 
             type="submit"

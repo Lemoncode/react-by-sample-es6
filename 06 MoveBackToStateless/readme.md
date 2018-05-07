@@ -63,4 +63,86 @@ NameEditComponent.propTypes = {
 };
 ```
 
-Finally we can check the sample executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
+Now, we can check the sample executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
+
+We can improve the example if we extract the function `onChange={(e) => props.onEditingNameUpdated(e.target.value)}`.
+
+_[nameEdit.jsx](./src/nameEdit.jsx)_
+```diff
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export const NameEditComponent = (props) => {
+++    const onChangeName = (e) => {
+++      props.onEditingNameUpdated(e.target.value)
+++    }
+      return (
+        <div>
+          <label>Update Name:</label>
+          <input 
+            value={props.editingUserName}
+--          onChange={(e) => props.onEditingNameUpdated(e.target.value)} 
+++          onChange={onChangeName} 
+          />
+          <input 
+            type="submit"
+            value="Change" 
+            className="btn btn-default" 
+            onClick={props.onNameUpdateRequest} 
+          />
+        </div>
+      );
+  }
+
+NameEditComponent.propTypes = {
+  editingUserName: PropTypes.string.isRequired,
+  onEditingNameUpdated: PropTypes.func.isRequired,
+  onNameUpdateRequest: PropTypes.func.isRequired
+};
+```
+
+> This solution is cleaner than the previous one, but inefficient. The function is generated every time we scroll through the code.
+
+Let's go one step ahead.
+
+_[nameEdit.jsx](./src/nameEdit.jsx)_
+```diff
+import React from 'react';
+import PropTypes from 'prop-types';
+
+++    const onChangeName = (props) => (e) => {
+++      props.onEditingNameUpdated(e.target.value)
+++    }
+
+export const NameEditComponent = (props) => {
+--    const onChangeName = (e) => {
+--      props.onEditingNameUpdated(e.target.value)
+--    }
+      return (
+        <div>
+          <label>Update Name:</label>
+          <input 
+            value={props.editingUserName}
+--          onChange={onChangeName} 
+++          onChange={onChangeName(props)} 
+          />
+          <input 
+            type="submit"
+            value="Change" 
+            className="btn btn-default" 
+            onClick={props.onNameUpdateRequest} 
+          />
+        </div>
+      );
+  }
+
+NameEditComponent.propTypes = {
+  editingUserName: PropTypes.string.isRequired,
+  onEditingNameUpdated: PropTypes.func.isRequired,
+  onNameUpdateRequest: PropTypes.func.isRequired
+};
+```
+
+> This solution allows you to execute the function only once.
+
+Finally, we can check the sample executing from the command line `npm start` and opening [http://localhost:8080](http://localhost:8080).
