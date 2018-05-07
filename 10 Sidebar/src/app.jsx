@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { HelloComponent } from './hello';
 import { NameEditComponent } from './nameEdit';
 import { SidebarComponent } from './sidebar';
@@ -24,35 +24,27 @@ export class App extends React.Component {
   }
 
   toggleSidebarVisibility() {
-    const newVisibleState = !this.state.isSidebarVisible;
+    const newVisibilityState = !this.state.isSidebarVisible;
 
     this.setState({
-      isSidebarVisible: newVisibleState,
+      isSidebarVisible: newVisibilityState,
     });
   }
 
   render() {
-    const buttonStyle = {
-      marginLeft: '450px',
-    };
-
     return (
       <div>
         <SidebarComponent isVisible={this.state.isSidebarVisible}>
           <h1>Test content</h1>
         </SidebarComponent>
         <HelloComponent userName={this.state.userName} />
-        <NameEditComponent
-          userName={this.state.userName}
-          onChange={this.setUsernameState}
-        />
-        <input
-          type="submit"
-          value="Toggle Sidear"
-          className="btn btn-default"
-          style={buttonStyle}
-          onClick={this.toggleSidebarVisibility}
-        />
+        <NameEditComponent 
+          userName={this.state.userName} 
+          onChange={this.setUsernameState} />
+        <button 
+          type="button" 
+          className="btn btn-default float-right"
+          onClick={this.toggleSidebarVisibility}>Toggle sidebar</button>
       </div>
     );
   }
