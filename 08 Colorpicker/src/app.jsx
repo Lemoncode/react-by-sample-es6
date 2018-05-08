@@ -28,7 +28,10 @@ export class App extends React.Component {
             blue: {this.state.color.blue}
           ]
         </span>
-        <ColorPicker color={this.state.color} onColorUpdated={this.setColorState} />
+        <ColorPicker
+          color={this.state.color}  
+          onColorUpdated={this.setColorState.bind(this)}
+        />
       </div>
     );
   }

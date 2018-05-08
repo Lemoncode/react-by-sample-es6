@@ -1,8 +1,9 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 export const ColorDisplayer = (props) => {
-  // `rgb(${props.color.red},${props.color.green}, ${props.color.blue}) })`
-  // 'rgb(' + props.color.red + ', 40, 80)'
+   `rgb(${props.color.red},${props.color.green}, ${props.color.blue}) })`
+   'rgb(' + props.color.red + ', 40, 80)'
   const divStyle = {
     width: '120px',
     height: '80px',
@@ -15,9 +16,10 @@ export const ColorDisplayer = (props) => {
 };
 
 ColorDisplayer.propTypes = {
-  color: React.PropTypes.shape({
-    red: React.PropTypes.number.isRequired,
-    green: React.PropTypes.number.isRequired,
-    blue: React.PropTypes.number.isRequired,
+  color: PropTypes.shape({
+    red: PropTypes.number.isRequired,
+    green: PropTypes.number.isRequired,
+    blue: PropTypes.number.isRequired,
   }).isRequired,
 };
+
