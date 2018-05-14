@@ -3,7 +3,7 @@
 In this sample we will create our first react component and connect it with the
 DOM via react-dom.
 
-We will take a startup point sanple _00 Boilerplate
+We will take a startup point sample _00 Boilerplate
 
 Summary steps:
 
@@ -29,11 +29,19 @@ npm install
 
 - Let's install react and react-dom libraries:
 
-```bash
+````
 npm install react react-dom --save
-```
+````
+- Let's install react and react-dom typescript definitions:
+
+````
+npm install  @types/react-dom @types/react --save -dev
+````
+- Update the index.html to create a placeholder for the react components
+
 
 - Update the [./index.html](./index.html) to create a placeholder for the react components
+
 
 _[./index.html](./index.html)_
 ```diff
@@ -89,19 +97,22 @@ _[./webpack.config.js](./webpack.config.js)_
  To handle jsx react components with webpack need to install babel-plugin-transform-runtime and babel-preset-react.
 
  ```
- npm install babel-preset-react --save-dev
+ npm install babel-plugin-transform-runtime babel-preset-react babel-preset-es2015 --save-dev
  ```
 
 Then in [./webpack.config.js](./webpack.config.js):
 
-_[./webpack.config.js](./webpack.config.js)_
-```javascript
- loaders: [
-   {
-     test: /\.jsx$/,
-     loader: "babel-loader",
-     exclude: /node_modules/,
-   },
+ ```javascript
+    rules: [
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          plugins: ['transform-runtime'],
+          presets : ['es2015', 'react']
+        }
+      },
 ```
 
 - Let's update _[./.babelrc](./.babelrc)_

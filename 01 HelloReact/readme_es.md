@@ -1,42 +1,43 @@
 # 01 Hello React
 
-En esta muestra, crearemos nuestro primer componente de react y lo conectaremos con el
-DOM a través de react-dom.
+En este ejemplo  crearemos nuestro primer componente react y lo conectaremos con el 
+DOM via react-dom.
 
-Tomaremos un punto de inicio sanple _[00 Boilerplate/](./../00%20Boilerplate/)_
+Tomaremos como punto de partida el ejemplo _00 Boilerplate
 
-Pasos resumidos:
+Resumen de pasos:
 
 - Instalar react y react-dom.
-- Instalar definiciones de react y react-dom typescript.
-- Actualice index.html para crear un marcador de posición para react component
-- Crea un componente de react simple.
-- Conecte este componente usando react-dom.
+- Instalar definiciones de typescript de react y react-dom.
+- Actualizar el index.html para crear un sitio para los componentes react.
+- Crear un componente simple de react.
+- Conectar este componente usando react-dom.
 
-## Requisitos previos
+## Prerrequisitos
 
-Instale [Node.js y npm](https://nodejs.org/en/) (v6.6.0) si aún no están instalados en su computadora.
+Instalar [Node.js and npm](https://nodejs.org/en/) (v6.6.0) si aún no están instalados en tu ordenador.
 
-> Verifique que esté ejecutando al menos los nodos v6.x.x y npm 3.x.x ejecutando `node -v` y` npm -v` en una ventana de terminal/ consola. Las versiones anteriores pueden producir errores.
+> Verificar que estás usando node v6.x.x y npm 3.x.x ejecutando `node -v` y `npm -v` en un terminal/console. Versiones viejas pueden provocar errores.
 
-## Steps to build it
+## Pasos para desarrollarlo:
 
-- Copie el contenido de _[00 Boilerplate/](./../00%20Boilerplate/)_ y ejecute `npm install`.
+- Copiar el contenido desde _00 Boilerplate_ y ejecutar _npm install_.
 
-```bash
-npm install
-```
 
-- Instalemos react y react-dom:
+- Instalar las librerias react y react-dom:
 
-```bash
+````
 npm install react react-dom --save
-```
+````
+- Instalar las definiciones de typescript de react y react-dom:
 
-- Actualice el [./index.html](./index.html) para crear un marcador para los componentes de react.
+````
+npm install  @types/react-dom @types/react --save -dev
+````
 
-_[./index.html](./index.html)_
-```diff
+- Actualizar el index.html para crear un sitio para los componentes de react 
+
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -45,88 +46,75 @@ _[./index.html](./index.html)_
   </head>
   <body>
     <h1>Sample app</h1>
-+    <div id="root">
-+    </div>    
+    <div id="root">
+    </div>    
   </body>
 </html>
 ```
 
-- Crea un componente de reacción simple (vamos a crearlo bajo un nuevo archivo llamado _[./src/hello.jsx](./src/hello.jsx)_)
+- Crear un componente react simple (lo creamos en un archivo llamado  _hello.jsx_)
 
-_[./src/hello.jsx](./src/hello.jsx)_
 ```javascript
 import React from 'react';
 
-export const HelloComponent = () =>
-    <p> Hello React!</p>
+class HelloComponent extends React.Component {
+  render () {
+    return (<p> Hello React!</p>);
+  }
+}
+
+export default HelloComponent;
 ```
 
-- Alinee este componente usando react-dom en _[./src/main.jsx](./src/main.jsx)_ (tenemos que cambiar el nombre de este archivo
-  de **js** a **jsx** y reemplazar el contenido).
+- Conectamos este componente usando react-dom en el _main.jsx_ (tenemos que renombrar este fichero
+  de js a jsx y remplazar el contenido).
 
-_[./src/main.jsx](./src/main.jsx)_
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HelloComponent} from './hello.jsx';
+import HelloComponent from './hello.jsx';
 
 ReactDOM.render(<HelloComponent/>, document.getElementById('root'));
 ```
 
-- Modifique el archivo [./webpack.config.js](./webpack.config.js) y cambie el punto de entrada de [./src/main.js](./src/main.jsx)
-a [./src/main.jsx](./src/main.jsx).
+- Modificar el `webpack.config.js` y cambiar el punto de entrada de `./main.js`
+a `./main.jsx`.
 
-_[./webpack.config.js](./webpack.config.js)_
- ```diff
+ ```javascript
  entry: [
--   './main.js',
-+   './main.jsx',
+   './main.jsx',
    '../node_modules/bootstrap/dist/css/bootstrap.css'
  ],
  ```
- 
-También deberá modificar el primer cargador de babel para manejar los archivos **jsx**.
-Para manejar **jsx**, los componentes de reacción con webpack necesitan instalar babel-plugin-transform-runtime y babel-preset-react.
+
+ También necesitas modificar el primer babel loader para manejar ficheros jsx.
+ Para manejar estos ficheros con webpack es necesario instalar babel-plugin-transform-runtime y babel-preset-react.
 
  ```
- npm install babel-preset-react --save-dev
+ npm install babel-plugin-transform-runtime babel-preset-react babel-preset-es2015 --save-dev
  ```
 
-Entonces en[./webpack.config.js](./webpack.config.js):
+Luego en `webpack.config.js`:
 
-_[./webpack.config.js](./webpack.config.js)_
-```javascript
- loaders: [
-   {
-     test: /\.jsx$/,
-     loader: "babel-loader",
-     exclude: /node_modules/,
-   },
-```
-
-- Actualicemos _[./.babelrc](./.babelrc)_
-
-_[./.babelrc](./.babelrc)_
-```diff
-{
-  "presets": [
-    [
-      "env",      
+ ```javascript
+    rules: [
       {
-        "modules": false
-      }
-    ],
-+   "react"    
-  ]
-}
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          plugins: ['transform-runtime'],
+          presets : ['es2015', 'react']
+        }
+      },
 ```
 
-- Ejecute el ejemplo:
+- Ejecutar el ejemplo:
 
  ```bash
- npm start
+ $ npm start
  ```
 
-- Luego, carga [http://localhost:8080/](http://localhost:8080/) en un navegador para ver la salida.
+- Finalmente, carga http://localhost:8080/ en un navegador para ver el resultado.
 
- ![Salida del navegador](../99_readme_resources/01 HelloReact/ browser_output.png)
+ ![Browser Output](../99_readme_resources/01 HelloReact/browser_output.png "Browser Output")

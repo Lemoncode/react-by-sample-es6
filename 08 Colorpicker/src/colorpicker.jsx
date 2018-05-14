@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 export const ColorPicker = props => (
   <div>
@@ -56,11 +57,14 @@ export const ColorPicker = props => (
   </div>
 );
 
-ColorPicker.propTypes = {
-  color: React.PropTypes.shape({
-    red: React.PropTypes.number.isRequired,
-    green: React.PropTypes.number.isRequired,
-    blue: React.PropTypes.number.isRequired,
+  ColorPicker.propTypes = {
+  color: PropTypes.shape({
+    red: PropTypes.number.isRequired,
+    green: PropTypes.number.isRequired,
+    blue: PropTypes.number.isRequired,
   }).isRequired,
-  onColorUpdated: React.PropTypes.func.isRequired,
-};
+  onColorUpdated: PropTypes.func.isRequired,
+}; 
+
+
+
