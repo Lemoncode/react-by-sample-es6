@@ -1,39 +1,38 @@
 # 13 ShouldUpdate
 
-In this sample we will enhance rendering performance hooking to 'shouldComponentUpdate'.
+En este ejemplo vamos a mejorar el rendimiento de renderizado con 'shouldComponentUpdate'.
 
-We are going to implement a customer satisfaction widget, based on smily faces,
-it will accept a range value (0 to 500), and the faces will have a range of values
-0..100, 100..200, 200..300, 300..400, 400..500. We will only fire the render option whenever
-the value jumps into the next or previous range.
+Vamos a implementar un widget de satisfacción del cliente, basado en caras o emoticonos.
+Este aceptará valores en un rango de 0 a 500, y las caras tendrán un rango de valores de
+0..100, 100..200, 200..300, 300..400, 400..500. Solo lanzaremos las opciones de render cuando
+los valores salten al próximo o al rango previo.
 
-We will take a startup point sample _03 State_:
+Tomaremos como punto de partida el ejemplo _03 State_:
 
-Summary steps:
+Resumen de pasos:
 
-- Remove _hello_ and _nameEdit_ components (app cleanup).
-- Copy under dir _content_ the four png's that contain the simleys.
-- Create under dir _content_ a _site.css_ file and define stlyes for the smileys.
-- Create a smily component.
-- Add to app state a currentValue entry, pass it to the control plus add an slider
-to configure it.
-- Let's add an optimization... componentshouldupdate.
+- Eliminar los componentes _hello_ y _nameEdit_ (limpieza de app).
+- Copiar bajo el directorio _content_ los 4 png's que contienen los smileys.
+- Create bajo el directorio _content_ un fichero _site.css_  y definir allí los estilos para los smileys.
+- Crear un componente smily.
+- Añadir al estado de la app una entrada currentValue, pasarle el cntrol y además añadirle un slider
+para configurarlo. 
+- Vamos a añadirle una optimización... componentshouldupdate.
 
-## Prerequisites
+## Prerrequisitos
 
-Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are not already installed on your computer.
+Instalar [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) si no están previamente instalados.
 
-> Verify that you are running at least node v6.x.x and npm 3.x.x by running `node -v` and `npm -v` in a terminal/console window. Older versions may produce errors.
 
-## Steps to build it
+## Pasos para construirlo:
 
-- Copy the content from _03 State_ and execute:
+- Copiar el contenido desde _03 State_ y ejecutarlo:
 
   ```
   npm install
   ```
 
-- Remove _nameEdit.js_ and _hello.jsx_, let's wipe them from _app.jsx_ as well:
+- Eliminar _nameEdit.js_ y _hello.jsx_, quitarlos también de _app.jsx_:
 
   ```jsx
   import * as React from 'react';
@@ -51,11 +50,10 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
   }
 
   ```
+- Crear una carpeta _src/content_ y copiar los 5 smiley (puedes copiarlos desde la carpeta de su 
+implementación en github).
 
-- Let's create a folder _src/content_ and copy the five smiley faces (you can
-  copy them from the sample implementation in github).
-
-- Let's create a css file: _src/content/site.css_ and add the smileys styles:
+- Vamos a crear un archivo css: _src/content/site.css_ y añadimos los estilos de los smileys:
 
   ```css
   .very-dissatisfied {
@@ -89,7 +87,7 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
   }
   ```
 
-- In _webpack.config.js_ let's add the new _css_ file as entry point:
+-En _webpack.config.js_ añadimos un nuevo punto de entrada _css_:
 
   ```javascript
   entry: [
@@ -99,7 +97,7 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
   ],
   ```
 
-- We need to add as well a loder to handle images in _webpackconfig.js_:
+- Necesitamos añadir un loder para manejar imágenes en _webpackconfig.js_:
 
   ```javascript
   {
@@ -109,8 +107,8 @@ Install [Node.js and npm](https://nodejs.org/en/) (v6.6.0 or newer) if they are 
   },
   ```
 
-- Let's create a simple _faceComponent_ under _src_, we will start by just adding
-something hardcoded in file _src/face.jsx_:
+- Vamos a crear un componente simple _faceComponent_ bajo _src_, vamos a comenzar con añadir
+algo hardcodeado en el fichero _src/face.jsx_:
 
   ```jsx
   import * as React from 'react';
@@ -126,7 +124,7 @@ something hardcoded in file _src/face.jsx_:
   export default FaceComponent;
   ```
 
-- Let's make a quick test on _app.jsx_
+- Vamos a hacer un pequeño test en _app.jsx_
 
   ```jsx
   import * as React from 'react';
@@ -148,14 +146,14 @@ something hardcoded in file _src/face.jsx_:
 
   ```
 
-- Let's make a check point and run the sample: check that is working as expected.
+- Vamos a añadir un check point y ejecutamos el ejemplo: Chequeamos que funciona como debe ser:
 
   ```
   npm start
   ```
 
-- Now it's time to link the property with the proper faces, let's create a style function
-for that in _face.jsx_
+- Ahora es tiempo de enlazar la propiedad con la cara apropiada, vamos a crear una función de estilos
+para ello, en el  _face.jsx_
 
   ```jsx
   import * as React from 'react';
@@ -194,9 +192,8 @@ for that in _face.jsx_
   export default FaceComponent;
 
   ```
-
-- In _app.jsx_ let's add a state variable to hold the current satisfaction level plus
-an slider to let the user update it.
+- En _app.jsx_ vamos a añadir una variable de estado para almacenar el nivel de
+satisfacción actual, además un slider que permita que el usuario lo actualice.
 
   ```jsx
   import * as React from 'react';
@@ -232,15 +229,15 @@ an slider to let the user update it.
 
   ```
 
-- Let's run the sample:
+- Ejecutemos el ejemplo:
 
   ```
   npm start
   ```
 
-- Let's add a rendering optimization, we should only trigger the render whenever
-the level just changes the satisfaction range, we need to move the component to
-state component:
+- Añadiremos una optimización, solo lanzaremos el render cuando el nivel 
+de satisfacción cambie de rango, necesitamos cambiar el componente a un componente que meneje 
+el estado:
 
   ```jsx
  import * as React from 'react';
@@ -299,8 +296,8 @@ state component:
 
   ```
 
-- Now if we place a breakpoint in the faceComponent render method we can see that
-render is only triggered when you change from a satisfaction range (e.g. 99 to 100).
+- Ahora si ponemos un breakpoint en el render del faceComponent podemos ver que 
+el render solo es lanzado cuando  cambiamos el rango de satisfacción (e.g. 99 to 100).
 
   ```
   npm start
