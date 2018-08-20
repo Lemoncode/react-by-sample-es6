@@ -18,8 +18,8 @@ class MembersTable extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <h2> Members Page</h2>
+      <div>
+        <h2>Members Page</h2>
         <table className="table">
           <thead>
             <tr>
