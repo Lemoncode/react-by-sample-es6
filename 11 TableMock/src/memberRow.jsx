@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 const MemberRow = props => (
   <tr>
@@ -16,12 +17,12 @@ const MemberRow = props => (
 
 MemberRow.propTypes = {
   // Is impossible to use:
-  //   member: React.PropTypes.instanceOf(MemberEntity),
+  //   member: PropTypes.instanceOf(MemberEntity),
   // with _clone().
-  member: React.PropTypes.shape({
-    id: React.PropTypes.number,
-    avatar_url: React.PropTypes.string,
-    login: React.PropTypes.string,
+  member: PropTypes.shape({
+    id: PropTypes.number,
+    avatar_url: PropTypes.string,
+    login: PropTypes.string,
   }),
 };
 
